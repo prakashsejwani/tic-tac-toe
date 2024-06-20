@@ -30,7 +30,9 @@ function Board({ xIsNext, squares, onPlay, setWinningSquares, winningSquares }) 
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner.player;
+    status = 'Winner: ' + winner;
+  } else if (isDraw(squares)) {
+    status = 'Its a Draw, play again!'
   } else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
@@ -63,7 +65,6 @@ export default function Game() {
   const [winningSquares, setWinningSquares] = useState([]);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
-  console.log('winningSquares', winningSquares)
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
@@ -118,4 +119,10 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function isDraw(squares) {
+
+  const flatSqures = squares.flat()
+  return flatSqures.every((v) => v !== null)
 }
