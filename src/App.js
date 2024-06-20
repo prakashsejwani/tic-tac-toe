@@ -9,8 +9,6 @@ function Square({ value, onSquareClick, style }) {
 }
 
 function Board({ xIsNext, squares, onPlay, setWinningSquares, winningSquares }) {
-  console.log('winningSquares from Board', winningSquares, ' winningSquares.includes(0)', winningSquares.includes(0))
-  winningSquares.includes(0)
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
